@@ -11,7 +11,7 @@ if (file_exists($credenciaisDir)) {
 	$def_cred = file_get_contents($credenciaisDir);
 	$def_cred = json_decode($def_cred);
 } else {
-	throw new Exception(notificacoes("c1"));
+	throw new Exception(notificacoes("z1"));
 }
 unset($credenciaisDir);
 
