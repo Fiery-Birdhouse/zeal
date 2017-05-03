@@ -120,9 +120,18 @@ END;
 */
 function notificacoes($indice) {
 	$mensagem[0] = "Operação realizada com sucesso";
-	$mensagem['c0'] = "Não foi possível se conectar ao servidor";
-	$mensagem['c1'] = "Arquivo de credenciais não encontrado";
-	$mensagem['c2'] = "Environment inválido";
+
+	// Erros de configuração
+	$mensagem['z0'] = "Não foi possível se conectar ao servidor";
+	$mensagem['z1'] = "Arquivo de credenciais não encontrado";
+	$mensagem['z2'] = "Environment inválido";
+
+	// Erros de conta
+	$mensagem['c0'] = "Dados insuficientes";
+	$mensagem['c1'] = "Usuário inexistente";
+	$mensagem['c2'] = "Senha incorreta";
+
+	// Erros especiais
 	$mensagem['json'] = json_last_error_msg();
 	return $mensagem[$indice];
 }
