@@ -25,7 +25,7 @@ final class ConnectionFactory {
 			$config = $connection[$env];
 
 			if (empty($config)) {
-				throw new Exception(notificacoes("c2"));
+				throw new Exception(notificacoes("z2"));
 			}
 
 			// Create PDO Object
