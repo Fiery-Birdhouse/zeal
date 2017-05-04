@@ -11,8 +11,8 @@ USE `zeal`;
 
 CREATE TABLE `Usuarios` (
   `codUsuario` int(11) NOT NULL,
-  `usuario` varchar(100) NOT NULL,
-  `senha` varchar(100) DEFAULT NULL,
+  `usuario` varchar(32) NOT NULL,
+  `senha` varchar(255) DEFAULT NULL,
   `token` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
