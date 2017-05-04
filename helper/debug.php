@@ -130,6 +130,11 @@ function notificacoes($indice) {
 	$mensagem['c0'] = "Dados insuficientes";
 	$mensagem['c1'] = "Usuário inexistente";
 	$mensagem['c2'] = "Senha incorreta";
+	$mensagem['c3'] = "Usuário já cadastrado";
+	$mensagem['c4'] = "Usuário não informado";
+	$mensagem['c5'] = "Senha não informada";
+	$mensagem['c6'] = "O nome de usuário deve conter entre 3 e 32 caracteres";
+	$mensagem['c7'] = "A senha deve conter no mínimo 8 caracteres";
 
 	// Erros especiais
 	$mensagem['json'] = json_last_error_msg();
