@@ -4,5 +4,7 @@ require_once '../helper/ajaxRestriction.php';
 $def_printHTML = false;
 require_once '../construct.php';
 
-echo Usuario::logar($_POST['usuario'], $_POST['senha']);
+$resultado = Usuario::logar($_POST['usuario'], $_POST['senha']);
+
+echo $resultado ? notificacoes($resultado) : 0; // Imprime mensagem de erro caso tenha ocorrido alguma falha
 ?>
