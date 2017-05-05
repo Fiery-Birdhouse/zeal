@@ -24,7 +24,7 @@ body {
     <form class="ui inverted form" id="loginForm" method="POST">
         <img src='assets/z.png' style="width: 100%; height: auto;"/>
         <p>
-          <div class="ui labeled fluid input">
+          <div class="ui labeled fluid input" id="campoUsuario">
             <div class="ui <?= $def_secColorClass ?> label" style="width: 5rem;">
               <center>Usuário</center>
             </div>
@@ -39,7 +39,16 @@ body {
             <input name="senha" type="password">
           </div>
         </p>
-        <button type="submit" class="ui submit <?= $def_secColorClass ?> inverted basic fluid button">Entrar</div>
+		<div class="ui fluid <?= $def_secColorClass ?> inverted basic buttons">
+			<button class="ui button" id="botaoEntrar">Entrar</button>
+			<button class="ui button" id="botaoRegistrar">Registrar-se</button>
+		</div>
+
+		<div class="ui horizontal inverted divider">Ou</div>
+
+		<button class="ui fluid inverted <?= $def_secColorClass ?> button" id="botaoFacebook">
+			<i class="facebook icon"></i>Entrar com Facebook
+		</button>
     </form>
 </div>
 
@@ -66,12 +75,12 @@ function submit() {
 }
 
 function errorAlert(erro) {
-    $("#loginsegment").popup({
+    $("#campoUsuario").popup({
         on: "manual",
-        position: "bottom center",
+        position: "top center",
         variation: "inverted",
         content: erro
     }).popup("show");
 }
-$("#loginForm").on("submit", submit);
+$("#botaoEntrar").on("click", submit);
 </script>
