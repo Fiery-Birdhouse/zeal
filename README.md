@@ -9,7 +9,7 @@ Zeal é um *software server-side* para compartilhamento de conhecimento, seja el
  - Seção de dúvidas
  - *Chat* de discussões
 
-Este é um sistema livre, isso significa que você pode contribuir com seus desenvolvimento, assim como replicá-lo em seu servidor.
+Este é um sistema livre, isso significa que você pode contribuir com o desenvolvimento, assim como replicá-lo em seu servidor.
 
 ----------------
 ##### Desenvolvedores:
