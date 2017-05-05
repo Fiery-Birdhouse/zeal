@@ -5,37 +5,41 @@ if (!defined(INCL_FILE)) die('HTTP/1.0 403 Forbidden');
 <style>
 body {
     overflow: hidden;
+	background: black;
 }
+
+#pagina {
+	background: black;
+}
+
 #loginsegment {
     max-width: 30rem;
     margin: 0 auto;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 </style>
 
 <div id="loginsegment">
     <br />
     <form class="ui inverted form" id="loginForm" method="POST">
-        <h1 class="ui inverted center aligned header" style="font-size: 50px;">
-            <i class="book icon"></i> Zeal
-        </h1>
+        <img src='assets/z.png' style="width: 100%; height: auto;"/>
         <p>
           <div class="ui labeled fluid input">
             <div class="ui <?= $def_secColorClass ?> label" style="width: 5rem;">
-              Usuário
+              <center>Usuário</center>
             </div>
-            <input type="text">
+            <input name="usuario" type="text">
           </div>
         </p>
         <p>
           <div class="ui labeled fluid input">
             <div class="ui <?= $def_secColorClass ?> label" style="width: 5rem;">
-              Senha
+              <center>Senha</center>
             </div>
-            <input type="password">
+            <input name="senha" type="password">
           </div>
         </p>
-        <button type="submit" class="ui submit red inverted basic fluid button">Entrar</div>
+        <button type="submit" class="ui submit <?= $def_secColorClass ?> inverted basic fluid button">Entrar</div>
     </form>
 </div>
 
@@ -43,7 +47,7 @@ body {
 function submit() {
     $(".submit.button").addClass("loading");
     $("#loginForm").off("submit").on("submit", false);
-    $.post("<?= $def_cred->rootURL ?>account/createsession.php", $("#loginForm").serializeArray(), function(response) {
+    $.post("<?= $def_cred->rootURL ?>conta/autenticar.php", $("#loginForm").serializeArray(), function(response) {
         if (response != 0) {
             // Print error alert
             errorAlert(response);
@@ -60,12 +64,13 @@ function submit() {
     // Prevent form from being submitted
     return false;
 }
-function errorAlert(id) {
+
+function errorAlert(erro) {
     $("#loginsegment").popup({
         on: "manual",
         position: "bottom center",
         variation: "inverted",
-        content: getErrorMessage(id)
+        content: erro
     }).popup("show");
 }
 $("#loginForm").on("submit", submit);
