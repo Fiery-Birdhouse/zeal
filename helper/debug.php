@@ -127,7 +127,7 @@ function notificacoes($indice) {
 	$mensagem['z2'] = "Environment inválido";
 
 	// Erros de conta
-	$mensagem['c0'] = "Dados insuficientes";
+	$mensagem['c0'] = "Usuário e/ou senha não informado(s)";
 	$mensagem['c1'] = "Usuário inexistente";
 	$mensagem['c2'] = "Senha incorreta";
 	$mensagem['c3'] = "Usuário já cadastrado";
