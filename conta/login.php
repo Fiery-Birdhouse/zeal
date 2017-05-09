@@ -1,5 +1,8 @@
 <?php
 if (!defined(INCL_FILE)) die('HTTP/1.0 403 Forbidden');
+$def_time=time();
+$def_endTime = 1496880000;
+$def_remainingTime = $def_endTime - $def_time;
 ?>
 
 <style>
@@ -24,6 +27,7 @@ body {
     <form class="ui inverted form" id="loginForm" method="POST">
         <img src='assets/z.png' style="width: 100%; height: auto;"/>
         <p>
+          <div class="ui center aligned grey header" id="timer"></div>
           <div class="ui labeled fluid input" id="campoUsuario">
             <div class="ui <?= $def_secColorClass ?> label" style="width: 5rem;">
               <center>Usuário</center>
@@ -53,6 +57,28 @@ body {
 </div>
 
 <script>
+function countdown(intervalo, update, complete) {
+    var timeNow = <?= $def_remainingTime ?>;
+    var interval = setInterval(function() {
+        timeNow--;
+
+        if (timeNow <= 0) {
+            clearInterval(interval);
+            complete();
+        } else update(timeNow);
+    }, intervalo);
+};
+
+countdown(
+    1000,
+    function(timeLeft) {
+        $("#timer").text(Math.floor(timeLeft/60/60/24) + ':' + Math.floor(timeLeft/60/60%24) + ':' + Math.floor(timeLeft/60%60) + ':' + Math.floor(timeLeft%60));
+    },
+    function() {
+        alert("Timer complete!");
+    }
+);
+
 function submit() {
     $(".submit.button").addClass("loading");
     $("#loginForm").off("submit").on("submit", false);
