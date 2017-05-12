@@ -2,7 +2,7 @@
 define('INCL_FILE', 'true');
 session_start();
 
-if (empty($_SESSION['user'])) {
+if (empty($_SESSION['usuario'])) {
 
 	// Importa página de login caso não esteja autenticado
     $def_navbar = false;
