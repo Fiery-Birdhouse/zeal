@@ -1,24 +1,20 @@
 <?php
 if (!defined(INCL_FILE)) die('HTTP/1.0 403 Forbidden');
-$def_time=time();
-$def_endTime = 1496880000;
-$def_remainingTime = $def_endTime - $def_time;
+$D = floor($def_remainingTime / (3600 * 24));
+$H = floor($def_remainingTime / 3600 % 24);
+$M = floor($def_remainingTime / 60 % 60);
+$S = floor($def_remainingTime % 60);
+$format = sprintf('%02d:%02d:%02d:%02d', $D, $H, $M, $S);
 ?>
 
 <style>
-body {
-    overflow: hidden;
-	background: black;
-}
-
-#pagina {
+body, #pagina {
 	background: black;
 }
 
 #loginsegment {
     max-width: 30rem;
     margin: 0 auto;
-    margin-top: 5%;
 }
 </style>
 
@@ -27,7 +23,7 @@ body {
     <form class="ui inverted form" id="loginForm" method="POST">
         <img src='assets/z.png' style="width: 100%; height: auto;"/>
         <p>
-          <div class="ui center aligned grey header" id="timer"></div>
+          <?= $def_remainingTime ? "<div class='ui center aligned grey header' id='timer'>$format</div>" : "" ?>
           <div class="ui labeled fluid input" id="campoUsuario">
             <div class="ui <?= $def_secColorClass ?> label" style="width: 5rem;">
               <center>Usuário</center>
@@ -45,7 +41,7 @@ body {
         </p>
 		<div class="ui fluid <?= $def_secColorClass ?> inverted basic buttons">
 			<button class="ui button" id="botaoEntrar">Entrar</button>
-			<button class="ui button" id="botaoRegistrar">Registrar-se</button>
+			<?= $def_remainingTime ? "<button class='ui button' id='botaoRegistrar'>Registrar-se</button>" : "" ?>
 		</div>
 
 		<div class="ui horizontal inverted divider">Ou</div>
@@ -57,6 +53,7 @@ body {
 </div>
 
 <script>
+<?php if ($def_remainingTime) { ?>
 function countdown(intervalo, update, complete) {
     var timeNow = <?= $def_remainingTime ?>;
     var interval = setInterval(function() {
@@ -72,12 +69,20 @@ function countdown(intervalo, update, complete) {
 countdown(
     1000,
     function(timeLeft) {
-        $("#timer").text(Math.floor(timeLeft/60/60/24) + ':' + Math.floor(timeLeft/60/60%24) + ':' + Math.floor(timeLeft/60%60) + ':' + Math.floor(timeLeft%60));
+		("0" + Math.floor(timeLeft/60/60/24)).slice(-2)
+		D = ("0" + Math.floor(timeLeft / (24 * 60 * 60))).slice(-2);
+        H = ("0" + Math.floor(timeLeft / (60 * 60) % 24)).slice(-2);
+        M = ("0" + Math.floor(timeLeft / 60 % 60)).slice(-2);
+        S = ("0" + Math.floor(timeLeft % 60)).slice(-2);
+
+        $("#timer").text(D + ':' + H + ':' + M + ':' + S);
     },
     function() {
         alert("Timer complete!");
     }
 );
+
+<?php } ?>
 
 function submit() {
     $(".submit.button").addClass("loading");
