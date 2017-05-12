@@ -12,6 +12,7 @@ if (!isset($_SESSION)) {
 # Definições padrões.
 $def_navbar = isset($def_navbar) ? $def_navbar : true; // Define se a barra de navegação deve ser adicionada na construção base da página
 $def_printHTML = isset($def_printHTML) ? $def_printHTML : true; // Define se este arquivo deve imprimir estrutura básica do site
+$def_remainingTime = time() < $def_cred->endTime ? $def_cred->endTime - time() : false; // Tempo restante para finalizar período de registro
 
 if (empty($def_secColorClass)) {
 	$def_secColorClass = date('H') >= 6 && date('H') <= 18 ? 'red' : 'violet';
@@ -46,7 +47,7 @@ if ($def_printHTML) {
 	<body>
 		<?php if ($def_navbar) { ?>
 		<div class="ui vertical inverted sidebar labeled icon menu" id="sidebar">
-			<a class="item navoption">
+			<a class="item navoption" href='<?= $def_cred->rootURL ?>'>
 				<i class="home icon"></i>
 				Início
 			</a>
