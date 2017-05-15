@@ -22,6 +22,7 @@ Utilize o seguinte modelo em seu `credenciais.json` para reproduzir o Zeal em se
         "rootURL":"/zeal/",
         "appId":"",
         "appPass":"",
+        "endTime": 1496880000,
         "dbProduction": {
                 "host":"",
                 "db":"",
