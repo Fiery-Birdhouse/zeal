@@ -54,7 +54,7 @@ class Usuario extends Record {
 	 * @param  	string 		$token
 	 * @return 	mixed
 	 */
-	static function registrar($usuario = null, $senha = null, $token = null) {
+	static function registrar($usuario = null, $senha = null, $token = null, $logar = false) {
 		$novoUsuario = new usuario();
 
 		if ($token) { // Registro por token
@@ -78,6 +78,11 @@ class Usuario extends Record {
 				$novoUsuario->usuario = $usuario;
 				$novoUsuario->senha = password_hash($senha, PASSWORD_DEFAULT);
 				$novoUsuario->store();
+
+				// Tenta logar assim que o usuário é registrado
+				if ($logar) {
+					Usuario::logar($usuario, $senha);
+				}
 
 				return 0;
 			} else {
