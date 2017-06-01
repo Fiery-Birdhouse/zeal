@@ -1,10 +1,15 @@
 <?php
 if (!defined(INCL_FILE)) die('HTTP/1.0 403 Forbidden');
+
+require_once 'Facebook/autoload.php';
 $D = floor($def_remainingTime / (3600 * 24));
 $H = floor($def_remainingTime / 3600 % 24);
 $M = floor($def_remainingTime / 60 % 60);
 $S = floor($def_remainingTime % 60);
 $format = sprintf('%02d:%02d:%02d:%02d', $D, $H, $M, $S);
+
+$helper = $fb->getRedirectLoginHelper();
+$facebookLoginUrl = $helper->getLoginUrl($def_cred->rootURL . 'conta/autenticarFB.php');
 ?>
 
 <style>
@@ -55,9 +60,9 @@ body, #pagina {
 
 		<div class="ui horizontal inverted divider">Ou</div>
 
-		<button class="ui fluid inverted <?= $def_secColorClass ?> button" id="botaoFacebook">
+		<a class="ui fluid inverted <?= $def_secColorClass ?> button" href="<?=htmlspecialchars($facebookLoginUrl)?>" id="botaoFacebook">
 			<i class="facebook icon"></i>Entrar com Facebook
-		</button>
+		</a>
 	</form>
 </div>
 
@@ -110,7 +115,7 @@ body, #pagina {
 
 <script>
 function submitLogin() {
-	$("#botaoEntrar").addClass("loading");
+	mostrarLoadingScreen();
 	$("#loginForm").off("submit").on("submit", false);
 	$(".button").addClass("disabled");
 
@@ -123,10 +128,10 @@ function submitLogin() {
 	}).fail(function() {
 		errorAlert("Não foi possível se conectar ao servidor", "campoUsuario");
 	}).always(function() {
-		$("#botaoEntrar").removeClass("loading");
+		esconderLoadingScreen();
 		$("#loginForm").on("submit", submitLogin);
 		$(".button").removeClass("disabled");
-	})
+	});
 	return false;
 }
 
@@ -171,7 +176,7 @@ function submitRegistro() {
 		}).always(function() {
 			$("#enviaRegistro").removeClass("loading");
 			$(".button").removeClass("disabled");
-		})
+		});
 	} else {
 		errorAlert(errorMessage, "modalRegistrar", "bottom center");
 		$("#enviaRegistro").removeClass("loading");
@@ -192,6 +197,7 @@ function errorAlert(erro, id, position) {
 	}).popup("show");
 }
 
+construirLoadingScreen();
 $("#loginForm").on("submit", submitLogin);
 
 $('#modalRegistrar').modal({
@@ -203,7 +209,7 @@ $('#modalRegistrar').modal({
 		$(".popup").popup("hide all");
 	}
 });
-$("#botaoRegistrar, #botaoFacebook").on("click", function() {
+$("#botaoRegistrar").on("click", function() {
 	$('#modalRegistrar').modal('show');
 	$(".popup").popup("hide all");
 	return false;
@@ -239,6 +245,5 @@ countdown(
 		$("#timer, #botaoRegistrar").remove();
 	}
 );
-
 <?php } ?>
 </script>
