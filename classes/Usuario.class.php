@@ -14,7 +14,7 @@ class Usuario extends Record {
 		// Verifica se a autenticação será realizada por token
 		if ($token) {
 			$usuario = Usuario::find(
-				array("token = ?", $token),
+				array("token = ? AND token IS NOT NULL", $token),
 				array('limit' =>  1)
 			);
 
@@ -27,7 +27,7 @@ class Usuario extends Record {
 		} elseif ($usuario && $senha) { // Autenticação por nome de usuário e senha
 			// Pesquisa conta pelo nome de usuário
 			$usuario = Usuario::find(
-				array("usuario = ?", $usuario),
+				array("usuario = ? AND usuario IS NOT NULL", $usuario),
 				array('limit' =>  1)
 			);
 
@@ -59,11 +59,16 @@ class Usuario extends Record {
 
 		if ($token) { // Registro por token
 			// Pesquisa por algum usuário com o mesmo token cadastrado
-			$usuarioExistente = Usuario::find(array('token = ?', $token), null);
+			$usuarioExistente = Usuario::find(array('token = ? AND token IS NOT NULL', $token), null);
 
 			if (empty($usuarioExistente)) {
 				$novoUsuario->token = $token;
 				$novoUsuario->store();
+
+				// Tenta logar assim que o usuário é registrado
+				if ($logar) {
+					Usuario::logar(null, null, $token);
+				}
 
 				return 0;
 			} else {
@@ -72,7 +77,7 @@ class Usuario extends Record {
 		} elseif (Usuario::dadosInvalidos($usuario, $senha)) {
 			return Usuario::dadosInvalidos($usuario, $senha); // Retorna código de erro caso haja alguma irregularidade nos dados informados
 		} else {
-			$usuarioExistente = Usuario::find(array('usuario = ?', $usuario), null);
+			$usuarioExistente = Usuario::find(array('usuario = ? AND usuario IS NOT NULL', $usuario), null);
 
 			if (empty($usuarioExistente)) {
 				$novoUsuario->usuario = $usuario;
