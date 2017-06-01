@@ -34,6 +34,7 @@ if ($def_printHTML) {
 
 		<script src="<?= $def_cred->rootURL ?>assets/js/jquery.js"></script>
 		<script src="<?= $def_cred->rootURL ?>assets/js/semantic.js"></script>
+		<script src="<?= $def_cred->rootURL ?>assets/js/loadingScreen.js"></script>
 
 		<style>
 		.navoption {
