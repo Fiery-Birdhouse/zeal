@@ -1,7 +1,7 @@
 <?php
 define('INCL_FILE', 'true');
-require_once '../helper/ajaxRestriction.php';
 $def_printHTML = false;
+require_once '../helper/ajaxRestriction.php';
 require_once '../construct.php';
 
 $resultado = Usuario::registrar($_POST['usuario'], $_POST['senha'], null, true);
