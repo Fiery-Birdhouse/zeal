@@ -64,6 +64,10 @@ if ($def_printHTML) {
 				<i class="Comments icon"></i>
 				Conversa
 			</a>
+			<a class="item" href="<?= $def_cred->rootURL ?>conta/sair.php">
+				<i class="Sign Out icon"></i>
+				Sair
+			</a>
 		</div>
 		<?php } ?>
 
