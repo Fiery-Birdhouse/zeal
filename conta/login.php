@@ -214,6 +214,7 @@ $("#botaoRegistrar").on("click", function() {
 	$(".popup").popup("hide all");
 	return false;
 });
+$("#botaoFacebook").click(mostrarLoadingScreen);
 
 <?php if ($def_remainingTime) { ?>
 function countdown(intervalo, update, complete) {
