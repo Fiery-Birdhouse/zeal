@@ -135,6 +135,7 @@ function notificacoes($indice) {
 	$mensagem['c5'] = "Senha não informada";
 	$mensagem['c6'] = "O nome de usuário deve conter entre 3 e 32 caracteres";
 	$mensagem['c7'] = "A senha deve conter no mínimo 8 caracteres";
+	$mensagem['c8'] = "Não é permitida a criação de novas contas";
 
 	// Erros especiais
 	$mensagem['json'] = json_last_error_msg();
