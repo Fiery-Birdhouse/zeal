@@ -217,34 +217,42 @@ $("#botaoRegistrar").on("click", function() {
 $("#botaoFacebook").click(mostrarLoadingScreen);
 
 <?php if ($def_remainingTime) { ?>
-function countdown(intervalo, update, complete) {
-	var timeNow = <?= $def_remainingTime ?>;
-	var interval = setInterval(function() {
-		timeNow--;
+	function countdown(intervalo, update, complete) {
+		var timeNow = <?= $def_remainingTime ?>;
+		var interval = setInterval(function() {
+			timeNow--;
 
-		if (timeNow <= 0) {
-			clearInterval(interval);
-			complete();
-		} else {
-			update(timeNow);
+			if (timeNow <= 0) {
+				clearInterval(interval);
+				complete();
+			} else {
+				update(timeNow);
+			}
+		}, intervalo);
+	};
+
+	countdown(
+		1000,
+		function(timeLeft) {
+			("0" + Math.floor(timeLeft/60/60/24)).slice(-2)
+			D = ("0" + Math.floor(timeLeft / (24 * 60 * 60))).slice(-2);
+			H = ("0" + Math.floor(timeLeft / (60 * 60) % 24)).slice(-2);
+			M = ("0" + Math.floor(timeLeft / 60 % 60)).slice(-2);
+			S = ("0" + Math.floor(timeLeft % 60)).slice(-2);
+
+			$("#timer").text(D + ':' + H + ':' + M + ':' + S);
+		},
+		function() {
+			$("#timer, #botaoRegistrar").remove();
 		}
-	}, intervalo);
-};
+	);
+<?php }
 
-countdown(
-	1000,
-	function(timeLeft) {
-		("0" + Math.floor(timeLeft/60/60/24)).slice(-2)
-		D = ("0" + Math.floor(timeLeft / (24 * 60 * 60))).slice(-2);
-		H = ("0" + Math.floor(timeLeft / (60 * 60) % 24)).slice(-2);
-		M = ("0" + Math.floor(timeLeft / 60 % 60)).slice(-2);
-		S = ("0" + Math.floor(timeLeft % 60)).slice(-2);
+// Verifica se houve erro autenticando pelo Facebook
+if (!empty($_SESSION['fbError'])) {
+	echo "errorAlert('" . notificacoes($_SESSION['fbError']) . "', 'botaoFacebook', 'bottom center');";
+	unset($_SESSION['fbError']);
+}
+?>
 
-		$("#timer").text(D + ':' + H + ':' + M + ':' + S);
-	},
-	function() {
-		$("#timer, #botaoRegistrar").remove();
-	}
-);
-<?php } ?>
 </script>
