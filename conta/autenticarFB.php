@@ -78,9 +78,16 @@ $user = $response->getGraphUser();
 
 $resultado = Usuario::logar(null, null, $user['id']);
 
+// Caso não haja um usuário criado para esta conta
 if ($resultado === "c1") {
-	$resultado = Usuario::registrar($user['name'], null, $user['id'], true);
+	if ($def_remainingTime) {
+		$resultado = Usuario::registrar($user['name'], null, $user['id'], true);
+	} else {
+		$resultado = "c8";
+	}
 }
+
+$_SESSION['fbError'] = $resultado;
 
 header('location: ' . $def_cred->rootURL);
 ?>
