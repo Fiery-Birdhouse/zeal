@@ -11,28 +11,21 @@ final class ConnectionFactory {
 	 * Create DB connection.
 	 * @return PDO
 	 */
-	static function getConnection($env = null) {
+	static function getConnection() {
 		global $connection;
-
-		// Set $def_cred->env from config.php as default environment
-		if (empty($env)) {
-			global $def_cred;
-			$env = $def_cred->env;
-		}
+		global $def_cred;
 
 		// Does not create connection if it was already created
-		if (empty(self::$cache[$env])) {
-			$config = $connection[$env];
-
-			if (empty($config)) {
+		if (empty(self::$cache["connection"])) {
+			if (empty($connection)) {
 				throw new Exception(notificacoes("z2"));
 			}
 
 			// Create PDO Object
-			$host = $config['host'];
-			$db = $config['db'];
-			$user = $config['user'];
-			$pass = $config['pass'];
+			$host = $connection['host'];
+			$db = $connection['db'];
+			$user = $connection['user'];
+			$pass = $connection['pass'];
 			$connection = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
 
 			// Set UTF-8 as used encoding
@@ -45,10 +38,10 @@ final class ConnectionFactory {
 			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 			// Store connection in cache
-			self::$cache[$env] = $connection;
+			self::$cache["connection"] = $connection;
 		}
 
-		return self::$cache[$env];
+		return self::$cache["connection"];
 	}
 
 }
