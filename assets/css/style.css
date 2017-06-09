@@ -6,6 +6,7 @@
 	top: 0px;
 	bottom: auto;
 	margin-top: 3rem;
+	z-index: 999;
 }
 
 @font-face {
