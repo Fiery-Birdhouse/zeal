@@ -16,24 +16,18 @@ Este é um sistema livre, isso significa que você pode contribuir com o desenvo
 Utilize o seguinte modelo em seu `credenciais.json` para reproduzir o Zeal em seu ambiente:
 
 ```json
+
 {
-        "env":"dev",
-        "timezone": "",
-        "rootURL":"/zeal/",
-        "appId":"",
-        "appPass":"",
-        "endTime": 1496880000,
-        "dbProduction": {
-                "host":"",
-                "db":"",
-                "user":"",
-                "pass":""
-        },
-        "dbDev": {
-                "host":"",
-                "db":"",
-                "user":"",
-                "pass":""
-        }
+	"timezone": "",
+	"rootURL":"",
+	"appId":"",
+	"appPass":"",
+	"endTime": 1500681600,
+	"database": {
+		"host":"",
+		"db":"",
+		"user":"",
+		"pass":""
+	}
 }
 ```
