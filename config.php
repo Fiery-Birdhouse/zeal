@@ -15,20 +15,12 @@ if (file_exists($credenciaisDir)) {
 }
 unset($credenciaisDir);
 
-// Armazena conexões usaradas nas operação de Active Record
+// Armazena conexão usada nas operações de Active Record
 $connection = array();
-
-$connection['production'] = array();
-$connection['production']['host'] = $def_cred->dbProduction->host;
-$connection['production']['db'] = $def_cred->dbProduction->db;
-$connection['production']['user'] = $def_cred->dbProduction->user;
-$connection['production']['pass'] = $def_cred->dbProduction->pass;
-
-$connection['dev'] = array();
-$connection['dev']['host'] = $def_cred->dbDev->host;
-$connection['dev']['db'] = $def_cred->dbDev->db;
-$connection['dev']['user'] = $def_cred->dbDev->user;
-$connection['dev']['pass'] = $def_cred->dbDev->pass;
+$connection['host'] = $def_cred->database->host;
+$connection['db'] = $def_cred->database->db;
+$connection['user'] = $def_cred->database->user;
+$connection['pass'] = $def_cred->database->pass;
 
 setlocale(LC_ALL, 'pt_BR.utf8');
 setlocale(LC_NUMERIC, 'en_US.utf8');
